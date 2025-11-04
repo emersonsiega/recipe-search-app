@@ -35,7 +35,7 @@ const TouchableListItem = ({
         </View>
 
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title} numberOfLines={1}>{title}</Text>
           {subtitle && (
             <Text style={styles.subtitle} numberOfLines={2}>
               {subtitle}
@@ -45,7 +45,7 @@ const TouchableListItem = ({
 
         {image && (
           <Image
-            resizeMode="contain"
+            resizeMode="cover"
             source={{ uri: image }}
             width={80}
             style={styles.image}
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
   },
   image: {
     backgroundColor: colors.backgroundSoft,
-    borderTopEndRadius: 12,
-    borderBottomEndRadius: 12,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
   },
 });
 

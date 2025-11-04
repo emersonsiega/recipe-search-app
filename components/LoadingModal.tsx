@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.backgroundSoft80,
-    // position: "absolute",
   },
 });
 

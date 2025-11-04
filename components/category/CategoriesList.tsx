@@ -1,12 +1,14 @@
-import { colors, sharedStyles } from "@/constants/theme";
-import categoriesService from "@/services/category/categoriesService";
+import categoriesService from "@/services/category/apiService";
 import { CategoryList } from "@/services/category/model";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text } from "react-native";
+import { FlatList } from "react-native";
+import ErrorText from "../ErrorText";
 import LoadingModal from "../LoadingModal";
 import TouchableListItem from "../TouchableListItem";
 
 const CategoriesList = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<CategoryList>([]);
@@ -31,20 +33,7 @@ const CategoriesList = () => {
 
   return (
     <>
-      {error && (
-        <>
-          <Text
-            style={{
-              ...sharedStyles.title,
-              marginTop: 14,
-              color: colors.errorFeedback,
-            }}
-          >
-            Failed to fetch categories:
-          </Text>
-          <Text style={styles.errorText}>{error}</Text>
-        </>
-      )}
+      <ErrorText error={error} text="Failed to fetch categories:" />
       <FlatList
         data={categories}
         renderItem={({ item: category, index }) => (
@@ -56,6 +45,15 @@ const CategoriesList = () => {
             subtitle={category.description}
             onPress={() => {
               console.log(`item ${category.name} pressed`);
+              router.push({
+                pathname: "/category",
+                params: {
+                  id: category.id,
+                  title: category.name,
+                  description: category.description,
+                  image: category.image,
+                },
+              });
             }}
             style={
               index === categories.length - 1 ? { marginBottom: 48 } : undefined
@@ -67,12 +65,5 @@ const CategoriesList = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  errorText: {
-    fontSize: 16,
-    color: colors.errorFeedback,
-  },
-});
 
 export default CategoriesList;

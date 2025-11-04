@@ -23,6 +23,19 @@ const RootLayout = () => {
         }}
       >
         <Stack.Screen name="index" options={{ title: "Recipes" }} />
+        <Stack.Screen
+          name="category"
+          options={({ route }) => ({
+            title: (route.params as { title?: string })?.title ?? "Category",
+          })}
+        />
+        <Stack.Screen
+          name="meal"
+          options={({ route }) => ({
+            title: (route.params as { name?: string })?.name ?? "Meal",
+            contentStyle: { padding: 0 },
+          })}
+        />
       </Stack>
     </>
   );

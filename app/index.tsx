@@ -18,8 +18,13 @@ const HomeScreen = () => {
       headerSearchBarOptions: {
         placeholder: "Search by recipe name",
         headerIconColor: colors.primaryText,
+        textColor: colors.primaryText,
+        hintTextColor: colors.primaryText,
+        tintColor: colors.primaryText,
+        shouldShowHintSearchIcon: false,
         onChangeText: setSearch,
         onSearchButtonPress: () => {
+          // TODO: implement search feature
           console.log("searching...");
         },
         onCancelButtonPress: () => {
